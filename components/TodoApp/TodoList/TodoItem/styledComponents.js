@@ -9,7 +9,7 @@ export const Container = styled.View`
   flex-direction: row;
   margin-left: 10;
   margin-right: 10;
-  border-block-end-width: 1px;
+  border-bottom-width: 1px;
   border-bottom-color: black;
 `;
 
@@ -18,7 +18,7 @@ export const Text = styled.Text`
   left: 60;
   flex: 1;
   ${props =>
-    !props.isCompleted &&
+    props.isCompleted &&
     css`
       position: absolute;
       left: 60;

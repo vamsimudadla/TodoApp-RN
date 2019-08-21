@@ -73,22 +73,23 @@ class TodoStore {
   @action.bound
   addFetchedTodos(todos) {
     todos.map(todo => {
-      const todoModel = new TodoModel();
-      todoModel.initialiseTodo(todo);
+      const todoModel = new TodoModel(todo);
       this.todos.push(todoModel);
     });
   }
 
-  async fetchTodosFromServer() {
-    try {
-      const response = await fetch("​https://api.myjson.com/bins/nhomr");
-      Alert.alert("response", response);
-      const todos = await response.json();
-      this.fetchStatus = data.loaded;
-      this.addFetchedTodos(todos);
-    } catch (error) {
-      this.fetchStatus = data.err;
-      console.log("Error >>>", error);
+  fetchTodosFromServer() {
+    if (this.todos.length === 0) {
+      fetch("https://api.myjson.com/bins/nhomr")
+        .then(response => response.json())
+        .then(responseJson => {
+          this.addFetchedTodos(responseJson);
+          this.fetchStatus = data.loaded;
+        })
+        .catch(e => {
+          console.log("error: ", e);
+          this.fetchStatus = data.err;
+        });
     }
   }
 }
