@@ -5,7 +5,7 @@ class ErrorMsg extends Component {
   render() {
     return (
       <ErrorMessage>
-        <Text>Network error</Text>
+        <Text>Network error...</Text>
       </ErrorMessage>
     );
   }
